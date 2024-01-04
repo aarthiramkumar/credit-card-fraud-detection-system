@@ -45,4 +45,10 @@ input_df_lst = input_df.split(',')
 submit = st.button("Submit")
 
 if submit:
-     st.write("Legitimate transaction")
+    features = np.array(input_df_lst, dtype=np.float64)
+    prediction_streamlit = model_streamlit.predict(features.reshape(1, -1))
+    # display result
+    if prediction_streamlit[0] == 0:
+        st.write("Legitimate transaction (Streamlit)")
+    else:
+        st.write("Fraudulent transaction (Streamlit)")
